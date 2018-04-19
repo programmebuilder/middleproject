@@ -8,6 +8,6 @@
 </head>
 <body>
 	Hello World!
-	안녕
+	한글은 왜 깨지는 거지?
 </body>
 </html>
