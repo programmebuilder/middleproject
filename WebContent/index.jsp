@@ -7,7 +7,5 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Hello World!
-	한글은 왜 깨지는 거지
 </body>
 </html>
