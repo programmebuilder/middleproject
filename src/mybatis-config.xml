@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 앞으로 사용할 객체에 대한 별칭 정해주기 -->
+	<typeAliases>
+		<typeAlias type="shop.socialnetwork.dto.BdImgDto" alias="BdImgDto" />
+		<typeAlias type="shop.socialnetwork.dto.BdRplyDto" alias="BdRplyDto"/>
+		<typeAlias type="shop.socialnetwork.dto.BdTagDto" alias="BdTagDto"/>
+		<typeAlias type="shop.socialnetwork.dto.BoardDto" alias="BoardDto"/>
+		<typeAlias type="shop.socialnetwork.dto.LikeTbDto" alias="LikeTbDto"/>
+		<typeAlias type="shop.member.dto.FollowingDto" alias="FollowingDto"/>
+		<typeAlias type="shop.member.dto.MemberDto" alias="MemberDto"/>
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="JNDI">
+				<property name="data_source" value="java:comp/env/jdbc/oracle" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<!-- 기본 경로는 src폴더 -->
+		<mapper resource="shop/socialnetwork/mapper/Board.xml" />
+	</mappers>
+
+</configuration>
