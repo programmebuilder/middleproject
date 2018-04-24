@@ -3,9 +3,12 @@ package shop.socialnetwork.dto;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class BdRplyDto implements Serializable{
-	private int bdRplyNo;
+public class BdRplyMemberDto implements Serializable{
 	private String mId;
+	private String mPasswd;
+	private String mBirth;
+	private String mNm;
+	private String mImg;
 	private String rplyContent;
 	private int groupNo;
 	private int stepNo;
@@ -13,13 +16,16 @@ public class BdRplyDto implements Serializable{
 	private int bdNo;
 	private Timestamp rplyUpLdTime;
 	
-	public BdRplyDto() {}
+	public BdRplyMemberDto() {}
 	
-	public BdRplyDto(int bdRplyNo, String mId, String rplyContent, int groupNo, int stepNo, int levNo, int bdNo,
-			Timestamp rplyUpLdTime) {
+	public BdRplyMemberDto(String mId, String mPasswd, String mBirth, String mNm, String mImg, String rplyContent,
+			int groupNo, int stepNo, int levNo, int bdNo, Timestamp rplyUpLdTime) {
 		super();
-		this.bdRplyNo = bdRplyNo;
 		this.mId = mId;
+		this.mPasswd = mPasswd;
+		this.mBirth = mBirth;
+		this.mNm = mNm;
+		this.mImg = mImg;
 		this.rplyContent = rplyContent;
 		this.groupNo = groupNo;
 		this.stepNo = stepNo;
@@ -28,20 +34,44 @@ public class BdRplyDto implements Serializable{
 		this.rplyUpLdTime = rplyUpLdTime;
 	}
 
-	public int getBdRplyNo() {
-		return bdRplyNo;
-	}
-
-	public void setBdRplyNo(int bdRplyNo) {
-		this.bdRplyNo = bdRplyNo;
-	}
-
 	public String getmId() {
 		return mId;
 	}
 
 	public void setmId(String mId) {
 		this.mId = mId;
+	}
+
+	public String getmPasswd() {
+		return mPasswd;
+	}
+
+	public void setmPasswd(String mPasswd) {
+		this.mPasswd = mPasswd;
+	}
+
+	public String getmBirth() {
+		return mBirth;
+	}
+
+	public void setmBirth(String mBirth) {
+		this.mBirth = mBirth;
+	}
+
+	public String getmNm() {
+		return mNm;
+	}
+
+	public void setmNm(String mNm) {
+		this.mNm = mNm;
+	}
+
+	public String getmImg() {
+		return mImg;
+	}
+
+	public void setmImg(String mImg) {
+		this.mImg = mImg;
 	}
 
 	public String getRplyContent() {
@@ -91,5 +121,5 @@ public class BdRplyDto implements Serializable{
 	public void setRplyUpLdTime(Timestamp rplyUpLdTime) {
 		this.rplyUpLdTime = rplyUpLdTime;
 	}
-	
+
 }

@@ -11,6 +11,8 @@
 		<typeAlias type="shop.socialnetwork.dto.BdTagDto" alias="BdTagDto"/>
 		<typeAlias type="shop.socialnetwork.dto.BoardDto" alias="BoardDto"/>
 		<typeAlias type="shop.socialnetwork.dto.LikeTbDto" alias="LikeTbDto"/>
+		<typeAlias type="shop.socialnetwork.dto.BoardMemberDto" alias="BoardMemberDto"/>
+		<typeAlias type="shop.socialnetwork.dto.BdRplyMemberDto" alias="BdRplyMemberDto"/>
 		<typeAlias type="shop.member.dto.FollowingDto" alias="FollowingDto"/>
 		<typeAlias type="shop.member.dto.MemberDto" alias="MemberDto"/>
 	</typeAliases>

@@ -1,21 +1,26 @@
 package shop.socialnetwork.dto;
 
+import java.io.Serializable;
 import java.security.Timestamp;
 
-public class BoardDto {
+public class BoardDto implements Serializable{
 	private int bdNo;
 	private String bdContent;
-	private Timestamp upldTime;
+	private Timestamp bdUpLdTime;
 	private String mId;
+	private int likeHits;
+	private int rplyHits;
 	
 	public BoardDto() {}
 
-	public BoardDto(int bdNo, String bdContent, Timestamp upldTime, String mId) {
+	public BoardDto(int bdNo, String bdContent, Timestamp bdUpLdTime, String mId, int likeHits, int rplyHits) {
 		super();
 		this.bdNo = bdNo;
 		this.bdContent = bdContent;
-		this.upldTime = upldTime;
+		this.bdUpLdTime = bdUpLdTime;
 		this.mId = mId;
+		this.likeHits = likeHits;
+		this.rplyHits = rplyHits;
 	}
 
 	public int getBdNo() {
@@ -34,12 +39,12 @@ public class BoardDto {
 		this.bdContent = bdContent;
 	}
 
-	public Timestamp getUpldTime() {
-		return upldTime;
+	public Timestamp getBdUpLdTime() {
+		return bdUpLdTime;
 	}
 
-	public void setUpldTime(Timestamp upldTime) {
-		this.upldTime = upldTime;
+	public void setBdUpLdTime(Timestamp bdUpLdTime) {
+		this.bdUpLdTime = bdUpLdTime;
 	}
 
 	public String getmId() {
@@ -49,5 +54,21 @@ public class BoardDto {
 	public void setmId(String mId) {
 		this.mId = mId;
 	}
-	
+
+	public int getLikeHits() {
+		return likeHits;
+	}
+
+	public void setLikeHits(int likeHits) {
+		this.likeHits = likeHits;
+	}
+
+	public int getRplyHits() {
+		return rplyHits;
+	}
+
+	public void setRplyHits(int rplyHits) {
+		this.rplyHits = rplyHits;
+	}
+
 }

@@ -1,6 +1,8 @@
 package shop.socialnetwork.dto;
 
-public class BdImgDto {
+import java.io.Serializable;
+
+public class BdImgDto implements Serializable {
 	private int imgNo;
 	private int bdNo;
 	private int fNo;
@@ -15,7 +17,7 @@ public class BdImgDto {
 		this.fNo = fNo;
 		this.imgUrl = imgUrl;
 	}
-
+	
 	public int getImgNo() {
 		return imgNo;
 	}

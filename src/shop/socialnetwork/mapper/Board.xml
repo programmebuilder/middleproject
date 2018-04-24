@@ -3,5 +3,64 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shop.socialnetwork.mapper.BoardMapper">
+	<cache />
+	<!-- 게시물 출력 (check)-->
+	<select id="printBoard" resultType="BoardDto">
+		SELECT *
+		  FROM BOARD
+	</select>
+	
+	<!-- 게시물 이미지 출력 (check)-->
+	<select id="printImage" resultType="BdImgDto">
+		SELECT *
+		  FROM BDIMG
+	</select>
+	
+	<!-- 게시물 작성자 닉네임 출력 (check) -->
+	<select id="printNickName" resultType="BoardMemberDto">
+		SELECT BD.mId, MR.mNm, MR.mImg, BD.bdNo 
+		  FROM BOARD BD, MEMBER MR
+		 WHERE BD.mId = MR.mId
+	</select>
+	
+	<!-- 게시물 댓글 출력(=가장 최근 댓글 3개) (check) -->
+	<select id="printThreeReply" resultType="BdRplyMemberDto">
+		SELECT B.bdRplyNo, M.mId, M.mNm, M.mImg, B.rplyContent, B.groupNo, B.stepNo, B.levNo, B.bdNo, B.rplyUpLdTime
+  		  FROM MEMBER M, BDRPLY B
+ 		 WHERE M.mId = B.mId
+	  ORDER BY rplyUpLdTime DESC
+	</select>
+	
+	<!-- 게시물 태그 출력 -->
+	<select id="printTag" resultType="BdTagDto" parameterType="int">
+		SELECT *
+		  FROM BDTAG
+	</select>
+	
+	<!-- 게시물 등록 -->
+	<insert id="insertBoard" parameterType="BoardDto">
+		INSERT INTO BOARD(bdContent, bdUpLdTime, mId)
+				   VALUES(#{bdContent}, SYSDATE, #{mId})
+	</insert>
+	
+	<!-- 게시물 이미지 등록 -->
+	<insert id="insertBoardImage" parameterType="java.util.HashMap">
+		INSERT INTO BDIMG(bdNo, fNo, imgUrl)
+				   VALUES(#{boardSeq}, #{fNo}, #{imgUrl})
+	</insert>
+	
+	<!-- 가장 최신 글 번호 조회 -->
+	<select id="selectBoardBdNo" resultType="Integer">
+		SELECT MAX(bdNo)
+		  FROM BOARD
+	</select>
+	
+	<!-- 게시물 시퀀스 가져요기 -->
+	<select id="getBoardSeq" resultType="Integer" parameterType="String">
+		SELECT bdNo
+		  FROM BOARD
+		 WHERE bdContent = #{value}
+	</select>
+	
 	
 </mapper>
