@@ -1,0 +1,70 @@
+@CHARSET "UTF-8";
+
+/* .white-popup-block {
+	background: #FFF;
+	padding: 20px 30px;
+	text-align: left;
+	max-width: 650px;
+	margin: 40px auto;
+	position: relative;
+} */
+
+.white-popup-block {
+	background: #FFF;
+	margin: 20px auto;
+	max-width: 500px;
+	overflow: auto;
+}
+
+.detail-div {
+	width: 100%;
+}
+
+.detail-div img {
+	width: 100%;
+	height: auto;
+}
+
+@media all and (max-width:30em) {
+	.detail-div { 
+		width: 100%;
+		float: none;
+	}
+}
+
+.reply-list {
+	list-style: none;
+	padding-left: 0;
+	overflow: auto;
+}
+
+.detailInfo-div {
+	padding: 20px;
+}
+
+.like-and-comment img {
+	width: inherit;
+}
+
+.comment-icon-span {
+	padding-left: 10px;
+}
+
+.likeNum {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.commentNum {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.userName {
+	padding-bottom: 5px;
+}
+
+.form-control {
+	border-color: gray;	
+}
+

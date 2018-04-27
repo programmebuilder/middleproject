@@ -5,13 +5,13 @@ package shop.socialnetwork.command;
  * Author: 안태현
  * Since: 20/04/2018
  * */
-public class CommandForward {
+public class ActionForward {
 	private boolean isRedirect;
 	private String path;
 	
-	public CommandForward() {}
+	public ActionForward() {}
 
-	public CommandForward(boolean isRedirect, String path) {
+	public ActionForward(boolean isRedirect, String path) {
 		super();
 		this.isRedirect = isRedirect;
 		this.path = path;

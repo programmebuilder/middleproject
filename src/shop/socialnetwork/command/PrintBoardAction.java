@@ -1,4 +1,3 @@
-
 package shop.socialnetwork.command;
 
 import java.text.DecimalFormat;
@@ -10,15 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import shop.socialnetwork.dao.BoardDao;
 import shop.socialnetwork.dto.BdImgDto;
-import shop.socialnetwork.dto.BdRplyDto;
 import shop.socialnetwork.dto.BdRplyMemberDto;
 import shop.socialnetwork.dto.BoardDto;
 import shop.socialnetwork.dto.BoardMemberDto;
 
-public class printBoardCommand implements Command {
+public class PrintBoardAction implements Action {
 
 	@Override
-	public CommandForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		BoardDao boardDao = BoardDao.getInstance();
 		List<BoardDto> listBoardDto = new ArrayList<BoardDto>();
@@ -31,7 +29,7 @@ public class printBoardCommand implements Command {
 			listBdImgDto = boardDao.printImage();
 			listBoardMemberDto = boardDao.printNickName();
 			listBdRplyMemberDto = boardDao.printThreeReply();
-		
+			
 			// 천의 자리 마다 ,(=콤마)를 넣는 과정
 			for(int i = 0; i < listBoardDto.size(); i++) {
 				// 좋아요 수
@@ -43,22 +41,24 @@ public class printBoardCommand implements Command {
 				// 댓글 수
 				double oldRplyHits = listBoardDto.get(i).getRplyHits();
 				int newRplyHits = Integer.parseInt(decimalFormat.format(oldRplyHits));
-				listBoardDto.get(i).setLikeHits(newRplyHits);
+				listBoardDto.get(i).setRplyHits(newRplyHits);
+				
 			}
 	
 			request.setAttribute("listBoardDto", listBoardDto);
 			request.setAttribute("listBdImgDto", listBdImgDto);
 			request.setAttribute("listBoardMemberDto", listBoardMemberDto);
 			request.setAttribute("listBdRplyMemberDto", listBdRplyMemberDto);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		CommandForward commandForward = new CommandForward();
-		commandForward.setRedirect(false);
-		commandForward.setPath("/board.jsp");
+		ActionForward actionForward = new ActionForward();
+		actionForward.setRedirect(false);
+		actionForward.setPath("/boardList.jsp");
 		
-		return commandForward;
+		return actionForward;
 	}
 
 }

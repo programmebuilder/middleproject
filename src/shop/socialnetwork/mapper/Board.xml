@@ -4,26 +4,26 @@
 
 <mapper namespace="shop.socialnetwork.mapper.BoardMapper">
 	<cache />
-	<!-- 게시물 출력 (check)-->
+	<!-- 게시물 출력 (완료)-->
 	<select id="printBoard" resultType="BoardDto">
 		SELECT *
 		  FROM BOARD
 	</select>
 	
-	<!-- 게시물 이미지 출력 (check)-->
+	<!-- 게시물 이미지 출력 (완료)-->
 	<select id="printImage" resultType="BdImgDto">
 		SELECT *
 		  FROM BDIMG
 	</select>
 	
-	<!-- 게시물 작성자 닉네임 출력 (check) -->
+	<!-- 게시물 작성자 닉네임 출력 (완료) -->
 	<select id="printNickName" resultType="BoardMemberDto">
 		SELECT BD.mId, MR.mNm, MR.mImg, BD.bdNo 
 		  FROM BOARD BD, MEMBER MR
 		 WHERE BD.mId = MR.mId
 	</select>
 	
-	<!-- 게시물 댓글 출력(=가장 최근 댓글 3개) (check) -->
+	<!-- 게시물 댓글 출력 (완료) -->
 	<select id="printThreeReply" resultType="BdRplyMemberDto">
 		SELECT B.bdRplyNo, M.mId, M.mNm, M.mImg, B.rplyContent, B.groupNo, B.stepNo, B.levNo, B.bdNo, B.rplyUpLdTime
   		  FROM MEMBER M, BDRPLY B
@@ -37,30 +37,82 @@
 		  FROM BDTAG
 	</select>
 	
-	<!-- 게시물 등록 -->
+	<!-- 게시물 등록 (완료) -->
 	<insert id="insertBoard" parameterType="BoardDto">
-		INSERT INTO BOARD(bdContent, bdUpLdTime, mId)
-				   VALUES(#{bdContent}, SYSDATE, #{mId})
+		INSERT INTO BOARD(bdNo, bdContent, bdUpLdTime, mId)
+				   VALUES(#{bdNo}, #{bdContent}, SYSDATE, #{mId})
 	</insert>
 	
-	<!-- 게시물 이미지 등록 -->
-	<insert id="insertBoardImage" parameterType="java.util.HashMap">
-		INSERT INTO BDIMG(bdNo, fNo, imgUrl)
-				   VALUES(#{boardSeq}, #{fNo}, #{imgUrl})
+	<!-- 게시물 이미지 등록 (완료) -->
+	<insert id="insertBoardImage" parameterType="BdImgDto">
+		INSERT INTO BDIMG(imgNo, bdNo, fNo, imgUrl)
+				   VALUES(#{imgNo}, #{bdNo}, #{fNo}, #{imgUrl})
 	</insert>
 	
-	<!-- 가장 최신 글 번호 조회 -->
+	<!-- 가장 최신 글 번호 조회 (완료) -->
 	<select id="selectBoardBdNo" resultType="Integer">
 		SELECT MAX(bdNo)
 		  FROM BOARD
 	</select>
 	
-	<!-- 게시물 시퀀스 가져요기 -->
-	<select id="getBoardSeq" resultType="Integer" parameterType="String">
-		SELECT bdNo
-		  FROM BOARD
-		 WHERE bdContent = #{value}
+	<!-- 가장 최신 이미지 번호 조회 (완료) -->
+	<select id="selectBdImgImgNo" resultType="Integer">
+		SELECT MAX(imgNo)
+		  FROM BDIMG
 	</select>
 	
+	<!-- 댓글 등록 (완료) -->
+	<insert id="insertReply" parameterType="BdRplyDto">
+		INSERT INTO BDRPLY(bdRplyNo, mId, rplyContent, groupNo, stepNo, levNo, bdNo, rplyUpLdTime)
+					VALUES(#{bdRplyNo}, #{mId}, #{rplyContent}, #{groupNo}, #{stepNo}, #{levNo}, #{bdNo}, SYSDATE)
+	</insert>
+	
+	<!-- 가장 최근 댓글 번호 조회 (완료) -->
+	<select id="selectBdRplyBdRplyNo" resultType="Integer">
+		SELECT MAX(bdRplyNo)
+		  FROM BDRPLY
+	</select>
+	
+	<!-- 한 게시물의 댓글 수 조회 (완료) -->
+	<select id="selectBoardRplyHits" resultType="Integer" parameterType="int">
+		SELECT COUNT(bdNo)
+    	  FROM BDRPLY
+    	 WHERE bdNO = #{bdNO}
+	</select>
+	
+	<!-- 댓글이 등록될 때 업데이트되는 댓글 수 (완료) -->
+	<update id="updateBoardRplyHits" parameterType="String">
+		UPDATE BOARD
+		   SET rplyHits = #{arg0}
+		 WHERE bdNO = #{arg1}
+	</update>
+	
+	<!-- 가장 최근 좋아요 번호 조회 -->
+	<select id="selectLikeTbLikeNo" resultType="Integer">
+		SELECT MAX(likeNo)
+		  FROM LIKETB
+	</select>
+	
+	<!-- 한 게시물의 좋아요 수 조회 -->
+	<select id="selectBoardLikeHits" resultType="Integer" parameterType="int">
+		SELECT COUNT(bdNo)
+		  FROM LIKETB
+		 WHERE bdNo = #{bdNo}
+	</select>
+	
+	<!-- 좋아요 추가 -->
+	<insert id="insertLike" parameterType="LikeTbDto">
+		INSERT INTO LIKETB(likeNo, mId, bdNo)
+					VALUES(#{likeNo}, #{mId}, #{bdNo})
+	</insert>
+	
+	<!-- 좋아요 취소 -->
+	<!-- <delete id="deleteLike" parameterType="Stirng">
+		DELETE
+		  FROM LIKETB
+		 WHERE bdNo = #{arg0}
+		   AND mId = #{arg1}
+	</delete> -->
 	
 </mapper>
+
